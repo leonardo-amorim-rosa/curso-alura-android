@@ -13,8 +13,10 @@ public class FormularioHelper {
     private final EditText telefone;
     private final EditText site;
     private final RatingBar nota;
+    private Aluno aluno;
 
     public FormularioHelper(Activity activity) {
+        aluno = new Aluno();
         nome = activity.findViewById(R.id.formulario_nome);
         endereco = activity.findViewById(R.id.formulario_endereco);
         telefone = activity.findViewById(R.id.formulario_telefone);
@@ -23,12 +25,20 @@ public class FormularioHelper {
     }
 
     public Aluno pegaAluno() {
-        Aluno aluno = new Aluno();
         aluno.setNome(nome.getText().toString());
         aluno.setEndereco(endereco.getText().toString());
         aluno.setTelefone(telefone.getText().toString());
         aluno.setSite(site.getText().toString());
         aluno.setNota(Double.valueOf(nota.getRating()));
         return aluno;
+    }
+
+    public void preencheFormulario(Aluno aluno) {
+        this.aluno = aluno;
+        this.nome.setText(aluno.getNome());
+        this.endereco.setText(aluno.getEndereco());
+        this.telefone.setText(aluno.getTelefone());
+        this.site.setText(aluno.getSite());
+        this.nota.setRating(aluno.getNota().floatValue());
     }
 }
