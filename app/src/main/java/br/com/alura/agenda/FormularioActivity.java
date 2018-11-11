@@ -3,6 +3,7 @@ package br.com.alura.agenda;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -41,9 +42,10 @@ public class FormularioActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                String caminhoFoto = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jsp";
+                String caminhoFoto = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jpg";
                 File arquivoFoto = new File(caminhoFoto);
-                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(arquivoFoto));
+                Uri uriForFile = FileProvider.getUriForFile(getBaseContext(), getApplicationContext().getPackageName() + ".br.com.alura.agenda.provider", arquivoFoto);
+                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, uriForFile);
                 startActivity(intentCamera);
             }
         });

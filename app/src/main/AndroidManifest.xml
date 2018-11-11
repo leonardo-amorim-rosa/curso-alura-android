@@ -20,8 +20,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FormularioActivity">
-        </activity>
+        <activity android:name=".FormularioActivity"></activity>
+
+        <provider
+            android:name=".provider.GenericClassProvider"
+            android:authorities="${applicationId}.br.com.alura.agenda.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
     </application>
 
 </manifest>
